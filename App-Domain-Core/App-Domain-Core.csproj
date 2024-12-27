@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <RootNamespace>App_Domain_Core</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Entities\**" />
+    <EmbeddedResource Remove="Entities\**" />
+    <None Remove="Entities\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Bank\Cards\DTO\" />
+    <Folder Include="Bank\Cards\Enums\" />
+    <Folder Include="Bank\Transaction\DTO\" />
+    <Folder Include="Bank\Transaction\Enums\" />
+    <Folder Include="Bank\User\AppServices\" />
+    <Folder Include="Bank\User\Data\" />
+    <Folder Include="Bank\User\DTO\" />
+    <Folder Include="Bank\User\Enums\" />
+    <Folder Include="Bank\User\Services\" />
+  </ItemGroup>
+
+</Project>

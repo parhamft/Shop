@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <RootNamespace>App_Domain_AppService</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Bank\User\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\App-Domain-Core\App-Domain-Core.csproj" />
+    <ProjectReference Include="..\App-Domain-Services\App-Domain-Services.csproj" />
+    <ProjectReference Include="..\App.Infra.Data.Repos.Ef\App.Infra.Data.Repos.Ef.csproj" />
+  </ItemGroup>
+
+</Project>
