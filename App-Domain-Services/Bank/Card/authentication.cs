@@ -7,7 +7,11 @@ namespace quiz.Services
 {
     public class authentication : Iauthentication
     {
-        ICardReposetory CRepo= new CardReposetory();
+        private readonly ICardReposetory CRepo;
+        public authentication(ICardReposetory _Repo)
+        {
+            CRepo = _Repo;
+        }
         public Card Login(string cardnum,string password)
         {
              Card c= CRepo.GetById(cardnum);

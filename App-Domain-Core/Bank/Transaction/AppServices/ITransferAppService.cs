@@ -10,6 +10,7 @@ namespace App_Domain_Core.Bank.contract
 
         public string ChangePassword(string cardnum, string OldPassword, string password);
         public float CheckBalance(string cardnum);
-        public string RecieversInfo(string cardnum);
+        public Card RecieversInfo(string cardnum);
+        public string TempCode();
     }
 }

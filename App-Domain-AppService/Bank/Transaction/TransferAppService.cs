@@ -10,9 +10,11 @@ namespace App_Domain_AppService.Bank
     public class TransferAppService : ITransferAppService
     {
 
-        ITransactionReposetory trepo = new TransactionReposetory();
-        ICardReposetory crepo = new CardReposetory();
-        ITransferService tservice= new TransferService();
+        private readonly ITransferService tservice;
+        public TransferAppService(ITransferService transferService)
+        {
+            tservice = transferService;
+        }
         public string transfer(Card cs, string DestinationCardNumber, float Amount)
         {
             tservice.CheckLimit(cs,Amount);
@@ -21,14 +23,10 @@ namespace App_Domain_AppService.Bank
             tservice.CheckBalance(cs,Fee,Amount);
             tservice.TempPassword();
 
+            return tservice.Transfer(cs,dc,Amount,DestinationCardNumber,Fee);
 
 
-
-            if (crepo.Deposit(dc.CardNumber, Amount) == false) { return "something went Wrong"; }
-            if (crepo.Withdraw(cs.CardNumber, (Amount * (1 + Fee / 100))) == false) { return "something went Wrong"; }
-            Transaction t = new Transaction(cs.CardNumber, DestinationCardNumber, Amount, DateTime.Now, true);
-            if (trepo.create(t) == false) { return "something went Wrong"; }
-            return "transaction compeleted";
+ 
         }
         public List<Transaction> Reports(string cardnum)
         {
@@ -43,9 +41,13 @@ namespace App_Domain_AppService.Bank
         {
              return tservice.CheckBalance(cardnum);
         }
-        public string RecieversInfo(string cardnum)
+        public Card RecieversInfo(string cardnum)
         {
             return tservice.RecieversInfo(cardnum);
+        }
+        public string TempCode()
+        {
+            return tservice.TempPassword();
         }
 
     }

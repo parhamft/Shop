@@ -1,0 +1,24 @@
+﻿
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-@TempData["AlertType"] alert-dismissible fade show" role="alert">
+        @TempData["Message"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+<div class="container">
+    <h2 class="text-center mb-4">Change Password</h2>
+    <form method="post" asp-action="ChangePassword" asp-controller="Change">
+        <div class="mb-3">
+
+            <label for="oldPass" class="form-label">Old Password</label>
+            <input type="text" class="form-control" name="oldPass" id="oldPass" placeholder="Enter your Old Password" required>
+        </div>
+        <div class="mb-3">
+            <label for="newPass" class="form-label">New Password</label>
+            <input type="password" class="form-control" id="newPass" name="newPass" placeholder="Enter your new password" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Login</button>
+    </form>
+</div>

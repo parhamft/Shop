@@ -8,8 +8,14 @@ namespace quiz.Services
 {
     public class TransferService  :ITransferService
     {
-        ITransactionReposetory trepo = new TransactionReposetory();
-        ICardReposetory crepo = new CardReposetory();
+        private readonly ITransactionReposetory trepo;
+        private readonly ICardReposetory crepo;
+
+        public TransferService(ITransactionReposetory transactionReposetory, ICardReposetory cardReposetory)
+        {
+            trepo = transactionReposetory;
+            crepo = cardReposetory;
+        }
 
         public bool CheckLimit(Card cs, float Amount)
         {
@@ -41,20 +47,22 @@ namespace quiz.Services
             if (cs.Balance < Amount * (1 + Fee / 100)) { throw new Exception ("not enough balance"); }
             return true ;
         }
-        public bool TempPassword()
+        public string TempPassword()
         {
             Random random = new Random();
             int code = random.Next(100000, 999999);
             TempCode temp = new TempCode();
-
             temp.password = code;
-            DateTime time = DateTime.Now;
             PasswordStorage.InsertCode(temp);
-            Console.Write("Please enter the code that has been sent : ");
-            int attempt = Convert.ToInt32(Console.ReadLine());
-            if (DateTime.Now.Minute - time.Minute > 5) { throw new Exception ("code is no longer valid!"); }
-            if (attempt != code) { throw new Exception("code Is Wrong"); }
-            return true ;
+            return Convert.ToString(code);
+        }
+        public string Transfer( Card cs, Card dc,float Amount, String DestinationCardNumber, float Fee)
+        {
+            if (crepo.Deposit(dc.CardNumber, Amount) == false) { return "something went Wrong"; }
+            if (crepo.Withdraw(cs.CardNumber, (Amount * (1 + Fee / 100))) == false) { return "something went Wrong"; }
+            Transaction t = new Transaction(cs.CardNumber, DestinationCardNumber, Amount, DateTime.Now, true);
+            if (trepo.create(t) == false) { return "something went Wrong"; }
+            return "transaction compeleted";
         }
 
         public List<Transaction> Reports(string cardnum)
@@ -77,11 +85,11 @@ namespace quiz.Services
         {
             return crepo.GetById(cardnum).Balance;
         }
-        public string RecieversInfo(string cardnum)
+        public Card RecieversInfo(string cardnum)
         {
             var card = crepo.GetById(cardnum);
             if (card == null) { throw new Exception("this card does not exist"); }
-            return $"{card.HolderName}";
+            return card;
         }
 
     }

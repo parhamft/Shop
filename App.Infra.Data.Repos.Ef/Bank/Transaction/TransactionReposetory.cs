@@ -6,7 +6,11 @@ namespace quiz.reposetories
 {
     public class TransactionReposetory : ITransactionReposetory
     {
-        BankDBContext _dbContext = new BankDBContext();
+        private readonly BankDBContext _dbContext;
+        public TransactionReposetory(BankDBContext bankDBContext)
+        {
+            _dbContext = bankDBContext;
+        }
         public bool create(Transaction t)
         {
             _dbContext.transactions.Add(t);

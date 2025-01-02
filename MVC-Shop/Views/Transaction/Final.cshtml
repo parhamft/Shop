@@ -1,0 +1,27 @@
+﻿@using App_Domain_Core.Bank.Cards.Services;
+@model Card
+@{
+    ViewData["Title"] = "Login";
+}
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-@TempData["AlertType"] alert-dismissible fade show" role="alert">
+        @TempData["Message"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="container">
+    <h2 class="text-center mb-4">@Model.HolderName</h2>
+
+    <form method="post" asp-action="transfer" asp-controller="Transaction">
+        <div class="mb-3">
+
+            <label for="code" class="form-label">Temperary code</label>
+            <input type="text" class="form-control" name="code" id="code" placeholder="Enter The Code" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Login</button>
+    </form>
+</div>

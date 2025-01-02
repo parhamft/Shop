@@ -6,7 +6,11 @@ namespace App_Domain_AppService.Bank
 {
     public class AuthnticationAppService : IAuthnticationAppService
     {
-        Iauthentication auth = new authentication();
+        private readonly Iauthentication auth;
+        public AuthnticationAppService(Iauthentication iauthentication)
+        {
+            auth = iauthentication;
+        }
         public Card Login(string cardnum, string password)
 
         {

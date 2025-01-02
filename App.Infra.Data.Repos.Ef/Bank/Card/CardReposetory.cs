@@ -8,8 +8,12 @@ namespace quiz.reposetories
 {
     public class CardReposetory : ICardReposetory
     {
-        BankDBContext _dbContext = new BankDBContext();
 
+        private readonly BankDBContext _dbContext;
+        public CardReposetory(BankDBContext dbContext)
+        {
+            _dbContext=dbContext;
+        }
         public bool create(Card c)
         {
             _dbContext.Cards.Add(c);

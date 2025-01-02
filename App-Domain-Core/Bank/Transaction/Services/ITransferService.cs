@@ -14,11 +14,12 @@ namespace App_Domain_Core.Bank.contract
         public float GetFee(float Amount);
         public Card ValidateCard(string DestinationCardNumber);
         public bool CheckBalance(Card cs, float Fee, float Amount);
-        public bool TempPassword();
+        public string TempPassword();
+        public string Transfer(Card cs, Card dc, float Amount, String DestinationCardNumber, float Fee);
         public List<Transaction> Reports(string cardnum);
         public string ChangePassword(string cardnum, string OldPassword, string password);
         public float CheckBalance(string cardnum);
-        public string RecieversInfo(string cardnum);
+        public Card RecieversInfo(string cardnum);
 
     }
 }

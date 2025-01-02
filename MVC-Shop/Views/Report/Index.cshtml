@@ -1,0 +1,29 @@
+﻿@using quiz.Entities;
+@model List<Transaction>
+
+
+        <h2>Transaction History</h2>
+    <table class="table table-bordered table-responsive table-primary table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Sender Card Number</th>
+                    <th>Receiver Card Number</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in @Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.SourceCardNumber</td>
+                <td>@item.DestinationCardNumber</td>
+                    <td>@item.Amount</td>
+                    <td>@item.TransferDate</td>
+                </tr>
+            }
+
+            </tbody>
+        </table>

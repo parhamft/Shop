@@ -1,7 +1,26 @@
+using App_Domain_AppService.Bank;
+using App_Domain_Core.Bank.Cards.AppServices;
+using App_Domain_Core.Bank.Cards.Services;
+using App_Domain_Core.Bank.contract;
+using Microsoft.AspNetCore.Authentication;
+using quiz.Contracts;
+using quiz.reposetories;
+using quiz.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
+
+builder.Services.AddDbContext<BankDBContext>();
+builder.Services.AddScoped<ICardReposetory, CardReposetory>();
+builder.Services.AddScoped<ITransactionReposetory,TransactionReposetory>();
+builder.Services.AddScoped<Iauthentication, authentication>();
+builder.Services.AddScoped<ITransferService, TransferService>();
+builder.Services.AddScoped<IAuthnticationAppService, AuthnticationAppService>();
+builder.Services.AddScoped<ITransferAppService, TransferAppService>();
 
 var app = builder.Build();
 

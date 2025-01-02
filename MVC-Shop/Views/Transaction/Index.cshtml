@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-@TempData["AlertType"] alert-dismissible fade show" role="alert">
+        @TempData["Message"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="container">
+    <h2 class="text-center mb-4">Transaction</h2>
+    <form method="post" asp-action="NextStep" asp-controller="Transaction">
+        <div class="mb-3">
+
+            <label for="Number" class="form-label">destination Card</label>
+            <input type="text" class="form-control" name="Number" id="Number" placeholder="Enter destination Card Number" required>
+        </div>
+        <div class="mb-3">
+            <label for="Amount" class="form-label">destination Card</label>
+            <input type="number" class="form-control" id="Amount" name="Amount" placeholder="Enter The Amount" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Login</button>
+    </form>
+</div>
