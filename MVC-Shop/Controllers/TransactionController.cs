@@ -32,7 +32,7 @@ namespace MVC_Shop.Controllers
             Auth.amount= Amount;
             Auth.tempcode = Service.TempCode();
           
-            return Redirect("/Transaction/Final");
+            return RedirectToAction("Final");
         }
 
         public IActionResult Final()
@@ -47,7 +47,7 @@ namespace MVC_Shop.Controllers
             {
                 TempData["Message"] = "Something is Wrong";
                 TempData["AlertType"] = "danger";
-                return Redirect("Transaction/final");
+                return RedirectToAction("Final");
             }
             Service.transfer(Auth.CurrentUser,Auth.number,Auth.amount);
             return Redirect("/Report");
